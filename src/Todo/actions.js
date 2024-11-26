@@ -9,6 +9,9 @@ export async function getTodos() {
             }
         });
         if (!res.ok) {
+            if (res.status === 401) {
+                alert("API Key is missing, make sure REACT_APP_TODO_API_KEY is set in .env");
+            }
             throw new Error(`Server error, status was ${res.status}`);
         }
         return await res.json();
