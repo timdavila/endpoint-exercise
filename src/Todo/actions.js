@@ -1,5 +1,5 @@
 const fetchToDosURL = 'https://b0f179aa-a791-47b5-a7ca-5585ba9e3642.mock.pstmn.io/get';
-const apiKey = 'PMAK-65a6d95a73d7f315b0b3ae13-28f9a3fada28cc91e0990b112478319641';
+const apiKey = `${process.env.REACT_APP_TODO_API_KEY}`;
 
 export async function getTodos() {
     try {
