@@ -36,7 +36,7 @@ export async function updateTodoStatus(id, completed) {
             body: JSON.stringify({isComplete: completed})
         });
         validateApiResponse(res);
-        return await res.status == "success";
+        return await res.status === "success";
     } catch (err) {
         console.error("Error updating todo");
         throw new Error(err.message);

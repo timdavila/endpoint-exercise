@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 import { getTodos, updateTodoStatus } from './actions';
 import TodoItem from './TodoItem';
 
@@ -65,15 +67,24 @@ export default function TodoList() {
     }, []);
 
     return (
-        <div>
-            <ul className={isLoading ? 'loading' : ''}>
-            {sortedTodoList.map((todo) => (
-                <TodoItem 
-                    key={todo.id}
-                    {...todo}
-                    toggleComplete={() => handleToggleComplete(todo.id,todo.isComplete)}/>
-            ))}
-            </ul>
+        <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-16">
+            <div className="px-4 py-2">
+                <h1 className="text-gray-800 font-bold text-2xl uppercase">To Do</h1>
+            </div>
+            {isLoading ? (
+                <div class="px-6">
+                    <Skeleton count={6} height={30} />
+                </div>
+            ): (
+                <ul className="divide-y divide-gray-200 px-4">
+                {sortedTodoList.map((todo) => (
+                    <TodoItem 
+                        key={todo.id}
+                        {...todo}
+                        toggleComplete={() => handleToggleComplete(todo.id,todo.isComplete)}/>
+                ))}
+                </ul>
+            )}
         </div>
     );
 }
