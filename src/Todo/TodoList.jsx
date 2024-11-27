@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-loading-skeleton/dist/skeleton.css';
+import { Flipper, Flipped } from 'react-flip-toolkit';
 import { getTodos, updateTodoStatus } from './actions';
 import TodoItem from './TodoItem';
 
@@ -72,18 +73,25 @@ export default function TodoList() {
                 <h1 className="text-gray-800 font-bold text-2xl uppercase">To Do</h1>
             </div>
             {isLoading ? (
-                <div class="px-6">
+                <div className="px-6">
                     <Skeleton count={6} height={30} />
                 </div>
             ): (
-                <ul className="divide-y divide-gray-200 px-4">
-                {sortedTodoList.map((todo) => (
-                    <TodoItem 
-                        key={todo.id}
-                        {...todo}
-                        toggleComplete={() => handleToggleComplete(todo.id,todo.isComplete)}/>
-                ))}
-                </ul>
+                <Flipper flipKey={sortedTodoList.map((item) => item.id).join('')}>
+                    <ul className="divide-y divide-gray-200 px-4">
+                    {sortedTodoList.map((todo) => (
+                        <Flipped key={todo.id} flipId={`${todo.description}${todo.isComplete}`}>
+                            {flippedProps => 
+                                <TodoItem 
+                                    key={todo.id}
+                                    {...todo}
+                                    flippedProps={flippedProps}
+                                    toggleComplete={() => handleToggleComplete(todo.id,todo.isComplete)}/>
+                            }
+                        </Flipped>
+                    ))}
+                    </ul>
+                </Flipper>
             )}
         </div>
     );
