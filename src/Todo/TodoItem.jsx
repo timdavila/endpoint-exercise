@@ -11,10 +11,8 @@ export default function TodoItem({id, description, isComplete, isOverdue, dueDat
         });
     }, [dueDate]);
 
-    const className = `py-4 todo ${isComplete ? 'complete ' : ''}${isOverdue ? 'overdue' : ''}`;
-
     return (
-        <li className={className}>
+        <li className={`py-4 todo ${isComplete ? 'complete ' : ''}${isOverdue ? 'overdue' : ''}`}>
             <div className="flex items-center">
                 <input type="checkbox"
                     id={`todo-${id}`}
@@ -23,7 +21,7 @@ export default function TodoItem({id, description, isComplete, isOverdue, dueDat
                     onChange={() => toggleComplete()} />
                 <label for={`todo-${id}`}
                     className="ml-3 block text-gray-900">
-                    <span className="text-lg font-medium">{description}</span> 
+                    <span className={`text-lg ${isComplete ? 'font-light line-through' : 'font-medium'}`}>{description}</span> 
                     <span className="text-sm font-light text-gray-600 pl-2">{formattedDueDate}</span>
                 </label>
             </div>
