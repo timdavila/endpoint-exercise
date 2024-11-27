@@ -33,4 +33,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Hosted Version
 
-The latest commit to `main` is also hosted at [https://endpoint.timdavila.com](https://endpoint.timdavila.com)
+The latest commit to `main` is also hosted at [https://endpoint-exercise.vercel.app/](https://endpoint-exercise.vercel.app/)
